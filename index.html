@@ -1,0 +1,1356 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Admin | Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+    .dropdown-toggle::after {
+        display: none;
+        margin-left: 0;
+        vertical-align: 0;
+        content: "";
+        border-top: none;
+        border-right: none;
+        border-bottom: 0;
+        border-left: none;
+    }
+
+    ::-webkit-scrollbar {
+        width: 3px;
+    }
+
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #c1c1c1;
+    }
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
+    }
+</style>
+
+<body onload="startTime()">
+
+    <div class="container-fluid nav_bar">
+        <div class="row" style="align-items: center;">
+            <div class="col-sm-4">
+                <span class="text-purple f-20">WELCOME</span>
+                <span class="f-20" style="color: #adb5bd;">&nbsp; | &nbsp; Smith Jones</span>
+            </div>
+            <div class="col-sm-4 margin">
+                <div id="txt" style="display: inline;"></div>
+
+                <script>
+                    function startTime() {
+                        const today = new Date();
+                        let h = today.getHours();
+                        let m = today.getMinutes();
+                        let s = today.getSeconds();
+                        m = checkTime(m);
+                        s = checkTime(s);
+                        document.getElementById('txt').innerHTML = h + " : " + m + " : " + s;
+                        setTimeout(startTime, 1000);
+                    }
+
+                    function checkTime(i) {
+                        if (i < 10) { i = "0" + i };  // add zero in front of numbers < 10
+                        return i;
+                    }
+                </script>
+
+                <span style="color: #adb5bd;">&nbsp; | &nbsp; Thursday 16 June 2022</span>
+            </div>
+            <div class="col-sm-4 icon-block">
+                <div class="row">
+                    <div class="col-sm-4" style="width: auto; display:inline-block;">
+                        <div class="dropdown" style="display: inline;">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" onclick="calcOpen()"
+                                id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"
+                                style="background-color: #ae69f5; border:none;">
+                                <i class="fa-solid fa-calculator"></i>
+                            </button>
+                            <div id="calc-box" style="border: none; display: none;">
+                                <!-- <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li> -->
+                                <div class="formstyle">
+                                    <form name="form1">
+
+                                        <!-- This input box shows the button pressed by the user in calculator. -->
+                                        <input id="calc" type="text" name="answer">
+                                        <!-- Display the calculator button on the screen. -->
+                                        <!-- onclick() function display the number prsses by the user. -->
+                                        <input type="button" value="1" onclick="form1.answer.value += '1' ">
+                                        <input type="button" value="2" onclick="form1.answer.value += '2' ">
+                                        <input type="button" value="3" onclick="form1.answer.value += '3' ">
+                                        <input type="button" value="+" onclick="form1.answer.value += '+' ">
+
+                                        <input type="button" value="4" onclick="form1.answer.value += '4' ">
+                                        <input type="button" value="5" onclick="form1.answer.value += '5' ">
+                                        <input type="button" value="6" onclick="form1.answer.value += '6' ">
+                                        <input type="button" value="-" onclick="form1.answer.value += '-' ">
+
+                                        <input type="button" value="7" onclick="form1.answer.value += '7' ">
+                                        <input type="button" value="8" onclick="form1.answer.value += '8' ">
+                                        <input type="button" value="9" onclick="form1.answer.value += '9' ">
+                                        <input type="button" value="*" onclick="form1.answer.value += '*' ">
+
+
+                                        <input type="button" value="/" onclick="form1.answer.value += '/' ">
+                                        <input type="button" value="0" onclick="form1.answer.value += '0' ">
+                                        <input type="button" value="." onclick="form1.answer.value += '.' ">
+                                        <!-- When we click on the '=' button, the onclick() shows the sum results on the calculator screen. -->
+                                        <input type="button" value="="
+                                            onclick="form1.answer.value = eval(form1.answer.value) ">
+                                        <!-- Display the Cancel button and erase all data entered by the user. -->
+                                        <input type="button" value="Clear All" onclick="form1.answer.value = ' ' "
+                                            id="clear">
+
+
+                                    </form>
+                                </div>
+                                <script>
+                                    function calcOpen() {
+                                        var calcOp = document.getElementById('calc-box');
+                                        if (calcOp.style.display == "none") {
+                                            calcOp.style.display = 'block';
+                                        }
+                                        else {
+                                            calcOp.style.display = 'none';
+                                        }
+                                    }
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4" style="width: auto; display:inline-block;">
+                        <button type="button" class="btn btn-primary position-relative i-btn" data-bs-toggle="modal"
+                            data-bs-target="#staticBackdrop" style="background-color: #ffc107; border:none;">
+                            <i class="fa-solid fa-folder"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill"
+                                style="background-color: #ae69f5; font-size:11px;">
+                                5
+                                <span class="visually-hidden">unread messages</span>
+                            </span>
+                        </button>
+
+                        <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                            tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-scrollable modal-xl">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="staticBackdropLabel">Draft Orders</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close">
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="container-fluid">
+                                            <div class="row" style="padding: 20px;">
+                                                <div class="col-sm-4 ">
+                                                    <div class="order">
+                                                        <h3>Order 1</h3>
+                                                        <div class="orderdetail-pos">
+                                                            <p>
+                                                                <strong>Customer Name</strong>
+                                                                Sophia Hale
+                                                            </p>
+                                                            <p>
+                                                                <strong>Address</strong>
+                                                                9825 Johnsaon Dr.Columbo,MD21044
+                                                            </p>
+                                                            <p>
+                                                                <strong>Payment Status</strong>
+                                                                Pending
+                                                            </p>
+                                                            <p>
+                                                                <strong>Total Items</strong>
+                                                                10
+                                                            </p>
+                                                            <p class="text-purple">
+                                                                <strong>Amount to Pay</strong>
+                                                                $722
+                                                            </p>
+                                                            <p class="edit-trash">
+                                                                <button class="btn1" style="padding-right: 10px;">
+                                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                                </button>
+                                                                <button class="btn1">
+                                                                    <i class="fa-solid fa-trash"></i>
+                                                                </button>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="order">
+                                                        <h3>Order 1</h3>
+                                                        <div class="orderdetail-pos">
+                                                            <p>
+                                                                <strong>Customer Name</strong>
+                                                                Sophia Hale
+                                                            </p>
+                                                            <p>
+                                                                <strong>Address</strong>
+                                                                9825 Johnsaon Dr.Columbo,MD21044
+                                                            </p>
+                                                            <p>
+                                                                <strong>Payment Status</strong>
+                                                                Pending
+                                                            </p>
+                                                            <p>
+                                                                <strong>Total Items</strong>
+                                                                10
+                                                            </p>
+                                                            <p class="text-purple">
+                                                                <strong>Amount to Pay</strong>
+                                                                $722
+                                                            </p>
+                                                            <p class="edit-trash">
+                                                                <button class="btn1" style="padding-right: 10px;">
+                                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                                </button>
+                                                                <button class="btn1">
+                                                                    <i class="fa-solid fa-trash"></i>
+                                                                </button>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="order">
+                                                        <h3>Order 1</h3>
+                                                        <div class="orderdetail-pos">
+                                                            <p>
+                                                                <strong>Customer Name</strong>
+                                                                Sophia Hale
+                                                            </p>
+                                                            <p>
+                                                                <strong>Address</strong>
+                                                                9825 Johnsaon Dr.Columbo,MD21044
+                                                            </p>
+                                                            <p>
+                                                                <strong>Payment Status</strong>
+                                                                Pending
+                                                            </p>
+                                                            <p>
+                                                                <strong>Total Items</strong>
+                                                                10
+                                                            </p>
+                                                            <p class="text-purple">
+                                                                <strong>Amount to Pay</strong>
+                                                                $722
+                                                            </p>
+                                                            <p class="edit-trash">
+                                                                <button class="btn1" style="padding-right: 10px;">
+                                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                                </button>
+                                                                <button class="btn1">
+                                                                    <i class="fa-solid fa-trash"></i>
+                                                                </button>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding: 20px;">
+                                                <div class="col-sm-4">
+                                                    <div class="order">
+
+                                                        <h3>Order 1</h3>
+                                                        <div class="orderdetail-pos">
+                                                            <p>
+                                                                <strong>Customer Name</strong>
+                                                                Sophia Hale
+                                                            </p>
+                                                            <p>
+                                                                <strong>Address</strong>
+                                                                9825 Johnsaon Dr.Columbo,MD21044
+                                                            </p>
+                                                            <p>
+                                                                <strong>Payment Status</strong>
+                                                                Pending
+                                                            </p>
+                                                            <p>
+                                                                <strong>Total Items</strong>
+                                                                10
+                                                            </p>
+                                                            <p class="text-purple">
+                                                                <strong>Amount to Pay</strong>
+                                                                $722
+                                                            </p>
+                                                            <p class="edit-trash">
+                                                                <button class="btn1" style="padding-right: 10px;">
+                                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                                </button>
+                                                                <button class="btn1">
+                                                                    <i class="fa-solid fa-trash"></i>
+                                                                </button>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="order">
+                                                        <h3>Order 1</h3>
+                                                        <div class="orderdetail-pos">
+                                                            <p>
+                                                                <strong>Customer Name</strong>
+                                                                Sophia Hale
+                                                            </p>
+                                                            <p>
+                                                                <strong>Address</strong>
+                                                                9825 Johnsaon Dr.Columbo,MD21044
+                                                            </p>
+                                                            <p>
+                                                                <strong>Payment Status</strong>
+                                                                Pending
+                                                            </p>
+                                                            <p>
+                                                                <strong>Total Items</strong>
+                                                                10
+                                                            </p>
+                                                            <p class="text-purple">
+                                                                <strong>Amount to Pay</strong>
+                                                                $722
+                                                            </p>
+                                                            <p class="edit-trash">
+                                                                <button class="btn1" style="padding-right: 10px;">
+                                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                                </button>
+                                                                <button class="btn1">
+                                                                    <i class="fa-solid fa-trash"></i>
+                                                                </button>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-4">
+                                                    <div class="order">
+                                                        <h3>Order 1</h3>
+                                                        <div class="orderdetail-pos">
+                                                            <p>
+                                                                <strong>Customer Name</strong>
+                                                                Sophia Hale
+                                                            </p>
+                                                            <p>
+                                                                <strong>Address</strong>
+                                                                9825 Johnsaon Dr.Columbo,MD21044
+                                                            </p>
+                                                            <p>
+                                                                <strong>Payment Status</strong>
+                                                                Pending
+                                                            </p>
+                                                            <p>
+                                                                <strong>Total Items</strong>
+                                                                10
+                                                            </p>
+                                                            <p class="text-purple">
+                                                                <strong>Amount to Pay</strong>
+                                                                $722
+                                                            </p>
+                                                            <p class="edit-trash">
+                                                                <button class="btn1" style="padding-right: 10px;">
+                                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                                </button>
+                                                                <button class="btn1">
+                                                                    <i class="fa-solid fa-trash"></i>
+                                                                </button>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row" style="padding: 20px;">
+                                                <div class="col-sm-4">
+                                                    <div class="order">
+                                                        <h3>Order 1</h3>
+                                                        <div class="orderdetail-pos">
+                                                            <p>
+                                                                <strong>Customer Name</strong>
+                                                                Sophia Hale
+                                                            </p>
+                                                            <p>
+                                                                <strong>Address</strong>
+                                                                9825 Johnsaon Dr.Columbo,MD21044
+                                                            </p>
+                                                            <p>
+                                                                <strong>Payment Status</strong>
+                                                                Pending
+                                                            </p>
+                                                            <p>
+                                                                <strong>Total Items</strong>
+                                                                10
+                                                            </p>
+                                                            <p class="text-purple">
+                                                                <strong>Amount to Pay</strong>
+                                                                $722
+                                                            </p>
+                                                            <p class="edit-trash">
+                                                                <button class="btn1" style="padding-right: 10px;">
+                                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                                </button>
+                                                                <button class="btn1">
+                                                                    <i class="fa-solid fa-trash"></i>
+                                                                </button>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <!-- <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button> -->
+                                        <button type="button" class="btn btn-purple">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4" style="width: auto; display:inline-block;">
+                        <div class="dropdown" style="display: inline;">
+                            <button class="btn btn-secondary dropdown-toggle i-btn" type="button"
+                                id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false"
+                                style="background-color: #e9ecef; border:none;">
+                                <i class="fa-solid fa-user text-purple"></i>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="#">Logout</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+
+    <div class="content-part">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="card card-custom">
+                        <div class="card-body">
+                            <div class="d_flex justify-content-between colorfull-select">
+                                <select class="w-150px btn-purple" style="border: none;">
+                                    <option value="1" class="opt">Men's</option>
+                                    <option value="2" class="opt">Accessories</option>
+                                </select>
+                                <select class="w-150px" style=" background-color: #f49d2a; border: none;">
+                                    <option value="1" class="opt">Men's</option>
+                                    <option value="2" class="opt">Accessories</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="product-items">
+                            <div class="row">
+                                <div class=" col-sm-4 ">
+                                    <div class="productCard">
+                                        <div class="productThumb">
+                                            <img class="img-fluid" src="element-banner2-right.jpg" alt="ix">
+                                        </div>
+                                        <div class="productContent">
+                                            <a href="#">
+                                                Men Polo Shirt (M) -MPS[2545-P]
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class=" col-sm-4">
+                                    <div class="productCard">
+                                        <div class="productThumb">
+                                            <img class="img-fluid" src="element-banner2-right.jpg" alt="ix">
+                                        </div>
+                                        <div class="productContent">
+                                            <a href="#">
+                                                Men Polo Shirt (M) -MPS[2545-P]
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class=" col-sm-4">
+                                    <div class="productCard">
+                                        <div class="productThumb">
+                                            <img class="img-fluid" src="element-banner2-right.jpg" alt="ix">
+                                        </div>
+                                        <div class="productContent">
+                                            <a href="#">
+                                                Men Polo Shirt (M) -MPS[2545-P]
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="productCard">
+                                        <div class="productThumb">
+                                            <img class="img-fluid" src="element-banner2-right.jpg" alt="ix">
+                                        </div>
+                                        <div class="productContent">
+                                            <a href="#">
+                                                Men Polo Shirt (M) -MPS[2545-P]
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="productCard">
+                                        <div class="productThumb">
+                                            <img class="img-fluid" src="element-banner2-right.jpg" alt="ix">
+                                        </div>
+                                        <div class="productContent">
+                                            <a href="#">
+                                                Men Polo Shirt (M) -MPS[2545-P]
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="productCard">
+                                        <div class="productThumb">
+                                            <img class="img-fluid" src="element-banner2-right.jpg" alt="ix">
+                                        </div>
+                                        <div class="productContent">
+                                            <a href="#">
+                                                Men Polo Shirt (M) -MPS[2545-P]
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="productCard">
+                                        <div class="productThumb">
+                                            <img class="img-fluid" src="element-banner2-right.jpg" alt="ix">
+                                        </div>
+                                        <div class="productContent">
+                                            <a href="#">
+                                                Men Polo Shirt (M) -MPS[2545-P]
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="productCard">
+                                        <div class="productThumb">
+                                            <img class="img-fluid" src="element-banner2-right.jpg" alt="ix">
+                                        </div>
+                                        <div class="productContent">
+                                            <a href="#">
+                                                Men Polo Shirt (M) -MPS[2545-P]
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="productCard">
+                                        <div class="productThumb">
+                                            <img class="img-fluid" src="element-banner2-right.jpg" alt="ix">
+                                        </div>
+                                        <div class="productContent">
+                                            <a href="#">
+                                                Men Polo Shirt (M) -MPS[2545-P]
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="productCard">
+                                        <div class="productThumb">
+                                            <img class="img-fluid" src="element-banner2-right.jpg" alt="ix">
+                                        </div>
+                                        <div class="productContent">
+                                            <a href="#">
+                                                Men Polo Shirt (M) -MPS[2545-P]
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="productCard">
+                                        <div class="productThumb">
+                                            <img class="img-fluid" src="element-banner2-right.jpg" alt="ix">
+                                        </div>
+                                        <div class="productContent">
+                                            <a href="#">
+                                                Men Polo Shirt (M) -MPS[2545-P]
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="productCard">
+                                        <div class="productThumb">
+                                            <img class="img-fluid" src="element-banner2-right.jpg" alt="ix">
+                                        </div>
+                                        <div class="productContent">
+                                            <a href="#">
+                                                Men Polo Shirt (M) -MPS[2545-P]
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="productCard">
+                                        <div class="productThumb">
+                                            <img class="img-fluid" src="element-banner2-right.jpg" alt="ix">
+                                        </div>
+                                        <div class="productContent">
+                                            <a href="#">
+                                                Men Polo Shirt (M) -MPS[2545-P]
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="productCard">
+                                        <div class="productThumb">
+                                            <img class="img-fluid" src="element-banner2-right.jpg" alt="ix">
+                                        </div>
+                                        <div class="productContent">
+                                            <a href="#">
+                                                Men Polo Shirt (M) -MPS[2545-P]
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="productCard">
+                                        <div class="productThumb">
+                                            <img class="img-fluid" src="element-banner2-right.jpg" alt="ix">
+                                        </div>
+                                        <div class="productContent">
+                                            <a href="#">
+                                                Men Polo Shirt (M) -MPS[2545-P]
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="productCard">
+                                        <div class="productThumb">
+                                            <img class="img-fluid" src="element-banner2-right.jpg" alt="ix">
+                                        </div>
+                                        <div class="productContent">
+                                            <a href="#">
+                                                Men Polo Shirt (M) -MPS[2545-P]
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4">
+                                    <div class="productCard">
+                                        <div class="productThumb">
+                                            <img class="img-fluid" src="element-banner2-right.jpg" alt="ix">
+                                        </div>
+                                        <div class="productContent">
+                                            <a href="#">
+                                                Men Polo Shirt (M) -MPS[2545-P]
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <div class="card card-custom" style="height: auto;">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <p style="margin-bottom: 5px;">
+                                        Choose a Customer
+                                        <!-- Button trigger modal -->
+                                        <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                            style="border: none; background:transparent;">
+                                            <i class="fa-solid fa-circle-plus"
+                                                style="color: #f49d2a;font-size:17px;"></i>
+                                        </button>
+
+                                        <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                                            <div class="modal-content" style="background-color: #f8f9fa;">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Add Customer</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="container-fluid">
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                <form action="" class="form">
+                                                                    <label for="">Customer Group</label> <br>
+                                                                    <select name="" id="">
+                                                                        <option value="general">General</option>
+                                                                        <option value="partial">Partial</option>
+                                                                    </select> <br>
+                                                                    <label for="">Company Name</label> <br>
+                                                                    <input type="text" placeholder="Enter company name">
+                                                                    <br>
+                                                                    <label for="">Email</label> <br>
+                                                                    <input type="email" placeholder="Enter email"> <br>
+                                                                    <label for="">Country</label> <br>
+                                                                    <select name="" id="">
+                                                                        <option value="Usa">Usa</option>
+                                                                        <option value="Uk">Uk</option>
+                                                                    </select> <br>
+                                                                    <label for="">City</label> <br>
+                                                                    <select name="" id="">
+                                                                        <option value="Dubai">Dubai</option>
+                                                                        <option value="Bahreen">Bahreen</option>
+                                                                    </select> <br>
+                                                                    <label for="">Address</label> <br>
+                                                                    <input type="text" placeholder="Enter Address"> <br>
+                                                                </form>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <form action="" class="form">
+                                                                    <label for="">Customer Name</label> <br>
+                                                                    <input type="text"
+                                                                        placeholder="Enter customer name"> <br>
+                                                                    <label for="">Tax Number</label> <br>
+                                                                    <input type="text" placeholder="Enter tax"> <br>
+                                                                    <label for="">Phone Number</label> <br>
+                                                                    <input type="text" placeholder="Enter phone number">
+                                                                    <br>
+                                                                    <label for="">State</label> <br>
+                                                                    <input type="text" placeholder="Enter State"><br>
+                                                                    <label for="">Postal Code</label> <br>
+                                                                    <input type="text" placeholder="Enter Postal code">
+                                                                    <br>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-purple">Add Customer</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <select name="" id="" style="background-color: #f8f9fa;width: 100%;
+                                    border-radius: 5px;
+                                    padding: 5px 2px; cursor:pointer;    border: 1px solid #d8dcdf;">
+                                        <option value="walk in customer">walk in customer</option>
+                                        <option value="blank"></option>
+                                    </select>
+                                </div>
+                                <div class="col-sm-6">
+                                    <p style="margin-bottom: 5px;">
+                                        Shipping Address
+                                        <!-- Button trigger modal -->
+                                        <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal1"
+                                            style="border: none; background:transparent;">
+                                            <i class="fa-solid fa-circle-plus"
+                                                style="color: #f49d2a;font-size:17px;"></i>
+                                        </button>
+
+                                        <!-- Modal -->
+                                    <div class="modal fade" id="exampleModal1" tabindex="-1"
+                                        aria-labelledby="exampleModalLabel1" aria-hidden="true">
+                                        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                                            <div class="modal-content" style="background-color: #f8f9fa;">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel1">Add Address</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                        aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <div class="container-fluid">
+                                                        <div class="row">
+                                                            <div class="col-sm-6">
+                                                                <form action="" class="form">
+                                                                    <label for="">Country</label> <br>
+                                                                    <select name="" id="">
+                                                                        <option value="Usa">Usa</option>
+                                                                        <option value="Uk">Uk</option>
+                                                                    </select> <br>
+                                                                    <label for="">City</label> <br>
+                                                                    <select name="" id="">
+                                                                        <option value="Dubai">Dubai</option>
+                                                                        <option value="Bahreen">Bahreen</option>
+                                                                    </select> <br>
+                                                                    <label for="">Address</label> <br>
+                                                                    <input type="text" placeholder="Enter Address"> <br>
+                                                                </form>
+                                                            </div>
+                                                            <div class="col-sm-6">
+                                                                <form action="" class="form">
+                                                                    <label for="">Phone Number</label> <br>
+                                                                    <input type="text" placeholder="Enter phone number">
+                                                                    <br>
+                                                                    <label for="">State</label> <br>
+                                                                    <input type="text" placeholder="Enter State"><br>
+                                                                    <label for="">Postal Code</label> <br>
+                                                                    <input type="text" placeholder="Enter Postal code">
+                                                                    <br>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-purple">Add Address</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <select name="" id="" style="background-color: #f8f9fa;width: 100%;
+                                    border-radius: 5px;
+                                    padding: 5px 2px; cursor:pointer;    border: 1px solid #d8dcdf;">
+                                        <option value="men's">Men's</option>
+                                        <option value="Accessories">Accessories</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card card-custom" style="height: 487px; margin-top: 20px;">
+                        <form action="" class="form-2">
+                            <label for="">Select Product</label> <br>
+                            <div style="display: flex;    margin: 10px 0 0 0;
+                            height: 33px;">
+
+                                <select name="" id=""
+                                    style="    border: 1px solid #d8dcdf;width: 125px; background-color: #f8f9fa;text-align: left; cursor: default;">
+                                    <option value="name">Name</option>
+                                    <option value="SKU">SKU</option>
+                                </select>
+                                <input type="text"
+                                    style="width: 100%;margin:0 0; background-color: #f8f9fa;text-align: left; cursor: default;">
+                            </div>
+                        </form>
+                        <div class="card-body" style="overflow: auto; padding-top: 0;">
+                            <div>
+                                <table class="table" style="overflow-y: scroll;">
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Quantity</th>
+                                        <th>Discount</th>
+                                        <th>Subtotal</th>
+                                        <th>&nbsp;</th>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Tiger Nixon</p>
+                                        </td>
+                                        <td>
+                                            <input type="number" value="10">
+                                        </td>
+                                        <td>000</td>
+                                        <td>0000</td>
+                                        <td>
+                                            <button style="border: none; background:transparent;">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Tiger Nixon</p>
+                                        </td>
+                                        <td>
+                                            <input type="number" value="10">
+                                        </td>
+                                        <td>000</td>
+                                        <td>0000</td>
+                                        <td>
+                                            <button style="border: none; background:transparent;">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Tiger Nixon</p>
+                                        </td>
+                                        <td>
+                                            <input type="number" value="10">
+                                        </td>
+                                        <td>000</td>
+                                        <td>0000</td>
+                                        <td>
+                                            <button style="border: none; background:transparent;">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Tiger Nixon</p>
+                                        </td>
+                                        <td>
+                                            <input type="number" value="10">
+                                        </td>
+                                        <td>000</td>
+                                        <td>0000</td>
+                                        <td>
+                                            <button style="border: none; background:transparent;">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Tiger Nixon</p>
+                                        </td>
+                                        <td>
+                                            <input type="number" value="10">
+                                        </td>
+                                        <td>000</td>
+                                        <td>0000</td>
+                                        <td>
+                                            <button style="border: none; background:transparent;">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Tiger Nixon</p>
+                                        </td>
+                                        <td>
+                                            <input type="number" value="10">
+                                        </td>
+                                        <td>000</td>
+                                        <td>0000</td>
+                                        <td>
+                                            <button style="border: none; background:transparent;">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Tiger Nixon</p>
+                                        </td>
+                                        <td>
+                                            <input type="number" value="10">
+                                        </td>
+                                        <td>000</td>
+                                        <td>0000</td>
+                                        <td>
+                                            <button style="border: none; background:transparent;">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Tiger Nixon</p>
+                                        </td>
+                                        <td>
+                                            <input type="number" value="10">
+                                        </td>
+                                        <td>000</td>
+                                        <td>0000</td>
+                                        <td>
+                                            <button style="border: none; background:transparent;">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Tiger Nixon</p>
+                                        </td>
+                                        <td>
+                                            <input type="number" value="10">
+                                        </td>
+                                        <td>000</td>
+                                        <td>0000</td>
+                                        <td>
+                                            <button style="border: none; background:transparent;">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Tiger Nixon</p>
+                                        </td>
+                                        <td>
+                                            <input type="number" value="10">
+                                        </td>
+                                        <td>000</td>
+                                        <td>0000</td>
+                                        <td>
+                                            <button style="border: none; background:transparent;">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Tiger Nixon</p>
+                                        </td>
+                                        <td>
+                                            <input type="number" value="10">
+                                        </td>
+                                        <td>000</td>
+                                        <td>0000</td>
+                                        <td>
+                                            <button style="border: none; background:transparent;">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Tiger Nixon</p>
+                                        </td>
+                                        <td>
+                                            <input type="number" value="10">
+                                        </td>
+                                        <td>000</td>
+                                        <td>0000</td>
+                                        <td>
+                                            <button style="border: none; background:transparent;">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Tiger Nixon</p>
+                                        </td>
+                                        <td>
+                                            <input type="number" value="10">
+                                        </td>
+                                        <td>000</td>
+                                        <td>0000</td>
+                                        <td>
+                                            <button style="border: none; background:transparent;">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Tiger Nixon</p>
+                                        </td>
+                                        <td>
+                                            <input type="number" value="10">
+                                        </td>
+                                        <td>000</td>
+                                        <td>0000</td>
+                                        <td>
+                                            <button style="border: none; background:transparent;">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <p>Tiger Nixon</p>
+                                        </td>
+                                        <td>
+                                            <input type="number" value="10">
+                                        </td>
+                                        <td>000</td>
+                                        <td>0000</td>
+                                        <td>
+                                            <button style="border: none; background:transparent;">
+                                                <i class="fa-solid fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="btn-box">
+                            <button class="btn btn-danger btn-res">
+                                <i class="fa-solid fa-trash"></i>
+                                Suspend/Cancel
+                            </button>
+                            <button class="btn btn-warning" style="color: #fff;">
+                                <i class="fa-solid fa-folder"></i>
+                                Draft Order
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="card card-custom">
+                        <div class="shop-profile">
+                            <div class="media">
+                                <div
+                                    class="btn-purple w-100px h-100px d-flex justify-content-center align-items-center">
+                                    <h2 class="mb-0 white">K</h2>
+                                </div>
+                                <div class="media-body ml-3">
+                                    <h3 class="title font-weight-bold">The Kundol Shop</h3>
+                                    <p class="phoonenumber">
+                                        02199+(070)234-4569
+                                    </p>
+                                    <p class="adddress">
+                                        Russel st 50,Bostron,MA
+                                    </p>
+                                    <p class="countryname">USA</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body" style="overflow-x: auto;">
+                            <table class="table-3">
+                                <tr>
+                                    <th>Total Items</th>
+                                    <td>6</td>
+                                </tr>
+                                <tr>
+                                    <th>Sub Total </th>
+                                    <td>$900</td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        <p style="margin-bottom: 5px;">
+                                            DISCOUNT(65%)
+                                            <!-- Button trigger modal -->
+                                            <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal2"
+                                                style="border: none; background:transparent;">
+                                                <i class="fa-solid fa-circle-plus"
+                                                    style="color: #f49d2a;font-size:17px;"></i>
+                                            </button>
+
+                                            <!-- Modal -->
+                                        <div class="modal fade" id="exampleModal2" tabindex="-1"
+                                            aria-labelledby="exampleModalLabel2" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                                                <div class="modal-content" style="background-color: #f8f9fa;">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel2">Add Discount
+                                                        </h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="container-fluid">
+                                                            <div class="row">
+                                                                <div class="col-sm-12">
+                                                                    <form action="" class="form">
+                                                                        <label for="">Discount</label> <br>
+                                                                        <div style="display: flex;">
+                                                                            <input type="text"
+                                                                                placeholder="Enter Discount"
+                                                                                style="margin: 0;">
+                                                                            <button type="button"
+                                                                                class="btn btn-warning"
+                                                                                style="margin-left: 10px; color:#fff;">Apply</button>
+                                                                        </div>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer" style="display: block;">
+                                                        <div class="" style="display: flex; justify-content: space-between;    background: #e9ecef;
+                                                        padding: 10px;">
+                                                            <h5 class="font-size-bold mb-0">Discount Applied of:</h5>
+                                                            <h5 class="font-size-bold mb-0">$20</h5>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <td>10%</td>
+                                </tr>
+                                <tr>
+                                    <th>Tax</th>
+                                    <td>$59</td>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        <p style="margin-bottom: 5px;">
+                                            Shipping Cost
+                                            <!-- Button trigger modal -->
+                                            <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal3"
+                                                style="border: none; background:transparent;">
+                                                <i class="fa-solid fa-circle-plus"
+                                                    style="color: #f49d2a;font-size:17px;"></i>
+                                            </button>
+
+                                            <!-- Modal -->
+                                        <div class="modal fade" id="exampleModal3" tabindex="-1"
+                                            aria-labelledby="exampleModalLabel3" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                                                <div class="modal-content" style="background-color: #f8f9fa;">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel3">Add Address</h5>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                            aria-label="Close"></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <div class="container-fluid">
+                                                            <div class="row">
+                                                                <div class="col-sm-6">
+                                                                    <form action="" class="form">
+                                                                        <label for="">Customer</label> <br>
+                                                                        <input type="text" placeholder="Enter Name"><br>
+                                                                        <label for="">Shipping Charges</label> <br>
+                                                                        <input type="text"
+                                                                            placeholder="Enter Shipping Charges">
+                                                                        <br>
+                                                                    </form>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <form action="" class="form">
+                                                                        <label for="">Shipping Address</label> <br>
+                                                                        <select name="" id="">
+                                                                            <option value="Usa">Usa</option>
+                                                                            <option value="Uk">Uk</option>
+                                                                        </select> <br>
+                                                                        <label for="">Shipping Status</label> <br>
+                                                                        <select name="" id="">
+                                                                            <option value="Dubai">Dubai</option>
+                                                                            <option value="Bahreen">Bahreen</option>
+                                                                        </select>
+                                                                    </form>
+                                                                </div>
+                                                            </div>
+                                                            <!-- <div class="row">
+                                                                <div class="col-sm-12">
+                                                                    <label for=""></label>
+                                                                </div>
+                                                            </div> -->
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-purple">Update
+                                                            Order</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </th>
+                                    <td>6</td>
+                                </tr>
+                                <tr>
+                                    <th>Additional Diiscount(15%)</th>
+                                    <td>$9</td>
+                                </tr>
+                                <tr style="font-size: 21px;">
+                                    <th class="text-purple">Total</th>
+                                    <td class="text-purple">$8100</td>
+                                </tr>
+                            </table>
+                            <hr>
+                        </div>
+                        <div style="justify-content: center; text-align:center; padding: 1rem; display: grid; ">
+                            <!-- Button trigger modal -->
+                            <button class="btn btn-purple" data-bs-toggle="modal" data-bs-target="#exampleModal4"
+                                style="border: none; display: block;">
+                                <i class="fa-solid fa-money-bill-1-wave"></i> Pay with cash
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal4" tabindex="-1"
+                                aria-labelledby="exampleModalLabel4" aria-hidden="true">
+                                <div class="modal-dialog modal-lg modal-dialog-scrollable">
+                                    <div class="modal-content" style="background-color: #f8f9fa;">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel4">Add Discount
+                                            </h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col-sm-12">
+                                                        <div class=""
+                                                            style="display: flex; justify-content: space-between;padding: 10px;">
+                                                            <h5 class="text-purple">Total amount to pay:
+                                                            </h5>
+                                                            <h5 class="text-purple">$20</h5>
+                                                        </div>
+                                                        <div class=""
+                                                            style="display: flex; justify-content: space-between;padding: 10px;">
+                                                            <h5 class="text-purple">Payment Mode:
+                                                            </h5>
+                                                            <h5 class="text-purple">cash</h5>
+                                                        </div>
+                                                        <form action="" style="text-align: left;">
+                                                            <label for="">Recieved Amount</label> <br>
+                                                            <input type="text" placeholder="$1000"
+                                                                style="width: 100%;    border: 1px solid #d8dcdf; text-align: left;">
+                                                        </form>
+                                                        <div class="" style="display: flex; justify-content: space-between;    background: #e9ecef;
+                                            padding: 10px; margin: 10px 0;">
+                                                            <h5 class="font-size-bold mb-0">Amount to return:
+                                                            </h5>
+                                                            <h5 class="font-size-bold mb-0">$20</h5>
+                                                        </div>
+                                                        <fieldset style="text-align: left;">
+                                                            <label for="" >Note(if any)</label> <br>
+                                                            <textarea name="" id="" cols="30" rows="10" style="    border: 1px solid #d8dcdf;width: 100%; background:transparent;">Enter</textarea>
+                                                        </fieldset>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                           <button class="btn btn-purple">
+                                                Submit
+                                           </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-warning" style="margin-top: 10px; color:#fff; display: block;">
+                                <i class="fa-solid fa-credit-card"></i> Pay with card
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
